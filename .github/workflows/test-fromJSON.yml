@@ -10,19 +10,19 @@ jobs:
       - name: TEST String
         run: |
           echo "::group::TEST: STRING = ${STRING}"
-          echo "=> Echo      : ${{ fromJSON(env.STRING) }}"
+          echo "=> Echo      : ${{ toJSON(fromJSON(env.STRING)) }}"
           echo "=> Expression: fromJSON(env.STRING) == 'text'"
           echo "=> Result    : ${{ fromJSON(env.STRING) == 'text' }}"
           echo "::endgroup::"
 
           echo "::group::TEST: NUMBER = ${NUMBER}"
-          echo "=> Echo      : ${{ fromJSON(env.NUMBER) }}"
+          echo "=> Echo      : ${{ toJSON(fromJSON(env.NUMBER)) }}"
           echo "=> Expression: fromJSON(env.NUMBER) == 123"
           echo "=> Result    : ${{ fromJSON(env.NUMBER) == 123 }}"
           echo "::endgroup::"
 
           echo "::group::TEST: BOOLEAN = ${BOOLEAN}"
-          echo "=> Echo      : ${{ fromJSON(env.BOOLEAN) }}"
+          echo "=> Echo      : ${{ toJSON(fromJSON(env.BOOLEAN)) }}"
           echo "=> Expression: fromJSON(env.BOOLEAN) == true"
           echo "=> Result    : ${{ fromJSON(env.BOOLEAN) == true }}"
           echo "::endgroup::"
