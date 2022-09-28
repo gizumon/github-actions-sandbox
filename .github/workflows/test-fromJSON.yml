@@ -1,7 +1,7 @@
 name: Test fromJSON
 on:
   push:
-    branches:
+    paths:
       - .github/workflows/test-fromJSON.yml
 jobs:
   static-check:
