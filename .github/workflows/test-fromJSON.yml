@@ -33,31 +33,31 @@ jobs:
       - name: TEST Array
         run: |
           echo "::group::TEST: ARRAY_NUMBER = ${ARRAY_NUMBER}"
-          echo "=> Echo      : ${{ fromJSON(env.ARRAY_NUMBER) }}"
+          echo "=> Echo      : ${{ toJSON(fromJSON(env.ARRAY_NUMBER)) }}"
           echo "=> Expression: fromJSON(env.ARRAY_NUMBER) == '[1, 2, 3]'"
           echo "=> Result    : ${{ fromJSON(env.ARRAY_NUMBER) == '[1, 2, 3]' }}"
           echo "::endgroup::"
 
           echo "::group::TEST: ARRAY_STRING = ${ARRAY_STRING}"
-          echo "=> Echo      : ${{ fromJSON(env.ARRAY_STRING) }}"
+          echo "=> Echo      : ${{ toJSON(fromJSON(env.ARRAY_STRING)) }}"
           echo "=> Expression: fromJSON(env.ARRAY_STRING) == '[\"1\",\"a\",\"true\",\"{\"a\":\"1\"}"]'"
           echo "=> Result    : ${{ fromJSON(env.ARRAY_STRING) == '[\"1\",\"a\",\"true\","{\"a\":\"1\"}"]' }}"
           echo "::endgroup::"
 
           echo "::group::TEST: ARRAY_BOOLEAN = ${ARRAY_BOOLEAN}"
-          echo "=> Echo      : ${{ fromJSON(env.ARRAY_BOOLEAN) }}"
+          echo "=> Echo      : ${{ toJSON(fromJSON(env.ARRAY_BOOLEAN)) }}"
           echo "=> Expression: fromJSON(env.ARRAY_BOOLEAN) == '[true, false]'"
           echo "=> Result    : ${{ fromJSON(env.ARRAY_BOOLEAN) == '[true, false]' }}"
           echo "::endgroup::"
 
           echo "::group::TEST: ARRAY_MIXED = ${ARRAY_MIXED}"
-          echo "=> Echo      : ${{ fromJSON(env.ARRAY_MIXED) }}"
+          echo "=> Echo      : ${{ toJSON(fromJSON(env.ARRAY_MIXED)) }}"
           echo "=> Expression: fromJSON(env.ARRAY_MIXED) == '[1, \"a\", true, "{\"a\":\"1\"}"]'"
           echo "=> Result    : ${{ fromJSON(env.ARRAY_MIXED) == '[1, \"a\", true, "{\"a\":\"1\"}"]' }}"
           echo "::endgroup::"
 
           echo "::group::TEST: ARRAY_BROKEN = ${ARRAY_BROKEN}"
-          echo "=> Echo      : ${{ fromJSON(env.ARRAY_BROKEN) }}"
+          echo "=> Echo      : ${{ toJSON(fromJSON(env.ARRAY_BROKEN)) }}"
           echo "=> Expression: fromJSON(env.ARRAY_BROKEN) == '[a,b,c]'"
           echo "=> Result    : ${{ fromJSON(env.ARRAY_BROKEN) == '[a,b,c]' }}"
           echo "::endgroup::"
