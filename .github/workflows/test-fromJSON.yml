@@ -2,7 +2,7 @@ name: Test fromJSON
 on:
   push:
     branches:
-      - .github/workflows/test1.yml
+      - .github/workflows/test-fromJSON.yml
 jobs:
   static-check:
     runs-on: ubuntu-latest
@@ -46,8 +46,8 @@ jobs:
 
           echo "::group::TEST: ARRAY_STRING = ${ARRAY_STRING}"
           echo "=> Echo      : ${{ fromJSON(${ARRAY_STRING}) }}"
-          echo "=> Expression: fromJSON(\${ARRAY_STRING}) == ["1","a","true","{\"a\":\"1\"}"]"
-          echo "=> Result    : ${{ fromJSON(${ARRAY_STRING}) == ["1","a","true","{\"a\":\"1\"}"] }}"
+          echo "=> Expression: fromJSON(\${ARRAY_STRING}) == [\"1\",\"a\",\"true\",\"{\"a\":\"1\"}"]"
+          echo "=> Result    : ${{ fromJSON(${ARRAY_STRING}) == [\"1\",\"a\",\"true\",'{\"a\":\"1\"}'] }}"
           echo "::endgroup::"
 
           echo "::group::TEST: ARRAY_BOOLEAN = ${ARRAY_BOOLEAN}"
@@ -58,8 +58,8 @@ jobs:
 
           echo "::group::TEST: ARRAY_MIXED = ${ARRAY_MIXED}"
           echo "=> Echo      : ${{ fromJSON(${ARRAY_MIXED}) }}"
-          echo "=> Expression: fromJSON(\${ARRAY_MIXED}) == [1, "a", true, {"a":"1"}]"
-          echo "=> Result    : ${{ fromJSON(${ARRAY_MIXED}) == [1, "a", true, {"a":"1"}] }}"
+          echo "=> Expression: fromJSON(\${ARRAY_MIXED}) == [1, \"a\", true, '{\"a\":\"1\"}']"
+          echo "=> Result    : ${{ fromJSON(${ARRAY_MIXED}) == [1, \"a\", true, '{\"a\":\"1\"}'] }}"
           echo "::endgroup::"
 
           echo "::group::TEST: ARRAY_BROKEN = ${ARRAY_BROKEN}"
