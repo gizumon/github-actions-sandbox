@@ -78,7 +78,7 @@ jobs:
           echo "::group::TEST: OBJECT_STRING = ${OBJECT_STRING}"
           echo "=> Echo      : ${{ fromJSON(env.OBJECT_STRING) }}"
           echo "=> Expression: fromJSON(env.OBJECT_STRING) == '{\"a\":\"1\",\"b\":\"a\",\"c\":\"true\",\"d\":\"{\"a\":\"1\"}\"}'"
-          echo "=> Result    : ${{ fromJSON(env.OBJECT_STRING) == '{\"a\":\"1\",\"b\":\"a\",\"c\":\"true\",\"d\":\"{\"a\":\"1\"}\"'} }}"
+          echo "=> Result    : ${{ fromJSON(env.OBJECT_STRING) == '{\"a\":\"1\",\"b\":\"a\",\"c\":\"true\",\"d\":\"{\"a\":\"1\"}\"}' }}"
           echo "::endgroup::"
 
           echo "::group::TEST: OBJECT_BOOLEAN = ${OBJECT_BOOLEAN}"
