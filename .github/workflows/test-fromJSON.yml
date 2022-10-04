@@ -3,33 +3,35 @@ on:
   push:
     paths:
       - .github/workflows/test-fromJSON.yml
+env:
+  TEST: "test value"
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - name: TEST String
         run: |
-          echo "=> Echo      : ${{ fromJSON(true) }}"
-      #     echo "=> Echo      : ${{ fromJSON(env.STRING) }}"
-      #     echo "=> Expression: fromJSON(env.STRING) == 'text'"
-      #     echo "=> Result    : ${{ fromJSON(env.STRING) == 'text' }}"
-      #     echo "::endgroup::"
+          echo "${{ env.TEST }}"
+          echo "=> Echo      : ${{ fromJSON( env.TEST ) }}"
 
-      #     echo "::group::TEST: NUMBER = ${NUMBER}"
-      #     echo "=> Echo      : ${{ toJSON(fromJSON(env.NUMBER)) }}"
-      #     echo "=> Expression: fromJSON(env.NUMBER) == 123"
-      #     echo "=> Result    : ${{ fromJSON(env.NUMBER) == 123 }}"
-      #     echo "::endgroup::"
+      # NUMBER: "123"
+      # BOOLEAN: "true"
+                # echo "=> Expression: fromJSON(env.STRING) == 'text'"
+      # echo "=> Result    : ${{ fromJSON(env.STRING) == 'text' }}"
+      # echo "::endgroup::"
 
-      #     echo "::group::TEST: BOOLEAN = ${BOOLEAN}"
-      #     echo "=> Echo      : ${{ fromJSON(env.BOOLEAN) }}"
-      #     echo "=> Expression: fromJSON(env.BOOLEAN) == true"
-      #     echo "=> Result    : ${{ fromJSON(env.BOOLEAN) == true }}"
-      #     echo "::endgroup::"
-        # env:
-        #   STRING: "text"
-        #   NUMBER: "123"
-        #   BOOLEAN: "true"
+      #       echo "::group::TEST: NUMBER = ${NUMBER}"
+      # echo "=> Echo      : ${{ toJSON(fromJSON(env.NUMBER)) }}"
+      # echo "=> Expression: fromJSON(env.NUMBER) == 123"
+      # echo "=> Result    : ${{ fromJSON(env.NUMBER) == 123 }}"
+      # echo "::endgroup::"
+
+      # echo "::group::TEST: BOOLEAN = ${BOOLEAN}"
+      # echo "=> Echo      : ${{ fromJSON(env.BOOLEAN) }}"
+      # echo "=> Expression: fromJSON(env.BOOLEAN) == true"
+      # echo "=> Result    : ${{ fromJSON(env.BOOLEAN) == true }}"
+      # echo "::endgroup::"
+
       # - name: TEST Array
       #   run: |
       #     echo "::group::TEST: ARRAY_NUMBER = ${ARRAY_NUMBER}"
