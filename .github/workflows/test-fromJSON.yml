@@ -12,7 +12,7 @@ jobs:
       - name: TEST String
         run: |
           echo "${{ env.TEST }}"
-          echo "=> Echo      : ${{ fromJSON( env.TEST ) }}"
+          echo "=> Echo      : ${{ fromJSON(env.TEST) }}"
 
       # NUMBER: "123"
       # BOOLEAN: "true"
