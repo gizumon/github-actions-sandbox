@@ -1,0 +1,118 @@
+name: Test fromJSON
+on:
+  push:
+    paths:
+      - .github/workflows/test-fromJSON.yml
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: TEST String (Success)
+        run: |
+          echo "::group::TEST: NUMBER = ${NUMBER}"
+          echo "=> Echo      : ${{ fromJSON(env.NUMBER) }}"
+          echo "=> Expression: fromJSON(env.NUMBER) == 123"
+          echo "=> Result    : ${{ fromJSON(env.NUMBER) == 123 }}"
+          echo "::endgroup::"
+
+          echo "::group::TEST: BOOLEAN = ${BOOLEAN}"
+          echo "=> Echo      : ${{ fromJSON(env.BOOLEAN) }}"
+          echo "=> Expression: fromJSON(env.BOOLEAN) == true"
+          echo "=> Result    : ${{ fromJSON(env.BOOLEAN) == true }}"
+          echo "::endgroup::"
+        env:
+          STRING: text
+          NUMBER: 123
+          BOOLEAN: true
+      - name: TEST String (Failed)
+        continue-on-error: true
+        run: |
+          echo "[NOTE]Should fail this"
+          echo "::group::TEST: STRING = ${STRING}"
+          echo "=> Echo      : ${{ fromJSON(env.STRING) }}"
+          echo "=> Expression: fromJSON(env.STRING) == 'text'"
+          echo "=> Result    : ${{ fromJSON(env.STRING) == 'text' }}"
+          echo "::endgroup::"
+        env:
+          STRING: text
+
+      # - name: TEST Array (Success)
+      #   run: |
+      #     echo "::group::TEST: ARRAY_NUMBER = ${ARRAY_NUMBER}"
+      #     echo "=> Echo      : ${{ toJSON(fromJSON(env.ARRAY_NUMBER)) }}"
+      #     echo "=> Expression: fromJSON(env.ARRAY_NUMBER) == ${ARRAY_NUMBER}"
+      #     echo "=> Result    : ${{ contains(fromJSON(env.ARRAY_NUMBER), 1) && contains(fromJSON(env.ARRAY_NUMBER), 2) && contains(fromJSON(env.ARRAY_NUMBER), 3) }}"
+      #     echo "::endgroup::"
+
+      #     # echo "::group::TEST: ARRAY_STRING = ${ARRAY_STRING}"
+      #     # echo "=> Echo      : ${{ toJSON(fromJSON(env.ARRAY_STRING)) }}"
+      #     # echo "=> Expression: fromJSON(env.ARRAY_STRING) == ${ARRAY_STRING}"
+      #     # echo "=> Result    : ${{ fromJSON(env.ARRAY_STRING) == '[\"1\",\"a\",\"true\","{\"a\":\"1\"}"]' }}"
+      #     # echo "::endgroup::"
+
+      #     # echo "::group::TEST: ARRAY_BOOLEAN = ${ARRAY_BOOLEAN}"
+      #     # echo "=> Echo      : ${{ toJSON(fromJSON(env.ARRAY_BOOLEAN)) }}"
+      #     # echo "=> Expression: fromJSON(env.ARRAY_BOOLEAN) == ${ARRAY_BOOLEAN}"
+      #     # echo "=> Result    : ${{ fromJSON(env.ARRAY_BOOLEAN) == '[true, false]' }}"
+      #     # echo "::endgroup::"
+
+      #     # echo "::group::TEST: ARRAY_MIXED = ${ARRAY_MIXED}"
+      #     # echo "=> Echo      : ${{ toJSON(fromJSON(env.ARRAY_MIXED)) }}"
+      #     # echo "=> Expression: fromJSON(env.ARRAY_MIXED) == ${ARRAY_MIXED}"
+      #     # echo "=> Result    : ${{ fromJSON(env.ARRAY_MIXED) == '[1, \"a\", true, "{\"a\":\"1\"}"]' }}"
+      #     # echo "::endgroup::"
+      #   env:
+      #     ARRAY_NUMBER: '[1,2,3]'
+      #     ARRAY_STRING: '["1","a","true","{\"a\":\"1\"}"]'
+      #     ARRAY_BOOLEAN: '[true,false]'
+      #     ARRAY_MIXED: '[1,"a",true,{"a":"1"}]'
+
+      # - name: TEST String (Failed)
+      #   continue-on-error: true
+      #   run: |
+      #     echo "[NOTE]Should fail this"
+      #     echo "::group::TEST: ARRAY_BROKEN = ${ARRAY_BROKEN}"
+      #     echo "=> Echo      : ${{ toJSON(fromJSON(env.ARRAY_BROKEN)) }}"
+      #     echo "=> Expression: fromJSON(env.ARRAY_BROKEN) == ${ARRAY_BROKEN}"
+      #     echo "=> Result    : ${{ fromJSON(env.ARRAY_BROKEN) == '[a,b,c]' }}"
+      #     echo "::endgroup::"
+      #   env:
+      #     ARRAY_BROKEN: "[a,b,c]"
+      # # - name: TEST Object
+      # #   run: |
+      # #     echo "::group::TEST: OBJECT_NUMBER = ${OBJECT_NUMBER}"
+      # #     echo "=> Echo      : ${{ fromJSON(env.OBJECT_NUMBER) }}"
+      # #     echo "=> Expression: fromJSON(env.OBJECT_NUMBER) == '{\"a\":1,\"b\":2,\"c\":3}'"
+      # #     echo "=> Result    : ${{ fromJSON(env.OBJECT_NUMBER) == '{\"a\":1,\"b\":2,\"c\":3}' }}"
+      # #     echo "::endgroup::"
+
+      # #     echo "::group::TEST: OBJECT_STRING = ${OBJECT_STRING}"
+      # #     echo "=> Echo      : ${{ fromJSON(env.OBJECT_STRING) }}"
+      # #     echo "=> Expression: fromJSON(env.OBJECT_STRING) == '{\"a\":\"1\",\"b\":\"a\",\"c\":\"true\",\"d\":\"{\"a\":\"1\"}\"}'"
+      # #     echo "=> Result    : ${{ fromJSON(env.OBJECT_STRING) == '{\"a\":\"1\",\"b\":\"a\",\"c\":\"true\",\"d\":\"{\"a\":\"1\"}\"}' }}"
+      # #     echo "::endgroup::"
+
+      # #     echo "::group::TEST: OBJECT_BOOLEAN = ${OBJECT_BOOLEAN}"
+      # #     echo "=> Echo      : ${{ fromJSON(env.OBJECT_BOOLEAN) }}"
+      # #     echo "=> Expression: fromJSON(env.OBJECT_BOOLEAN) == '{\"a\":true,\"b\":false}'"
+      # #     echo "=> Result    : ${{ fromJSON(env.OBJECT_BOOLEAN) == '{\"a\":true,\"b\":false}' }}"
+      # #     echo "::endgroup::"
+
+      # #     echo "::group::TEST: OBJECT_MIXED = ${OBJECT_MIXED}"
+      # #     echo "=> Echo      : ${{ fromJSON(env.OBJECT_MIXED) }}"
+      # #     echo "=> Expression: fromJSON(env.OBJECT_MIXED) == '{\"a\":1,\"b\":\"a\",\"c\":true,\"d\":{\"a\":\"1\"}}'"
+      # #     echo "=> Result    : ${{ fromJSON(env.OBJECT_MIXED) == '{\"a\":1,\"b\":\"a\",\"c\":true,\"d\":"{\"a\":\"1\"}"}' }}"
+      # #     echo "::endgroup::"
+
+      # #     echo "::group::TEST: OBJECT_BROKEN = ${OBJECT_BROKEN_1}"
+      # #     echo "=> Echo      : ${{ fromJSON(env.OBJECT_BROKEN_1) }}"
+      # #     echo "=> Expression: fromJSON(env.OBJECT_BROKEN_1) == '{\"a\":a,\"b\":b,\"c\":c}'"
+      # #     echo "=> Result    : ${{ fromJSON(env.OBJECT_BROKEN_1) == '{\"a\":a,\"b\":b,\"c\":c}' }}"
+      # #     echo "::endgroup::"
+
+      # #   env:
+      # #     OBJECT_NUMBER: '{"1":1, "2":2, "3":3}'
+      # #     OBJECT_STRING: '{"str":"str", "num":"1", "bool":"true"}'
+      # #     OBJECT_BOOLEAN: '{"true":true,"false":false}'
+      # #     OBJECT_MIXED: '{"a":1,"b":"a","c":true,"d":{"a":"1"}}'
+      # #     OBJECT_BROKEN_1: '{"a":a,"b":b,"c":c}'
