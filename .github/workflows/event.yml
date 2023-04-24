@@ -18,7 +18,7 @@ jobs:
           echo "github.event: ${{ toJSON(github.event) }}"
 
       - name: Event Pull Request
-        if: github.event_name == 'push'
+        if: github.event_name == 'pull_request'
         run: |
           echo "github.event_name: ${{ github.event_name }}"
           echo "github.event: ${{ toJSON(github.event) }}"
@@ -40,7 +40,7 @@ jobs:
           echo "github.event.pull_request.number: ${{ github.event.pull_request.number }}"
 
 
-      - name: Access Non Exist Key (push event access pull_request event)
+      - name: Get pull request number
         run: |
           echo "github.event_name: ${{ github.event_name }}"
           echo "github.event.pull_request: ${{ github.event.pull_request }}"
