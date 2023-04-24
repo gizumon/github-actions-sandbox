@@ -1,0 +1,39 @@
+name: Event behavior check
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - .github/workflows/event.yml
+  push:
+    paths:
+      - .github/workflows/event.yml
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Event Push
+        if: github.event_name == 'push'
+        run: |
+          echo "github.event_name: ${{ github.event_name }}"
+          echo "github.event: ${{ toJSON(github.event) }}"
+
+      - name: Event Pull Request
+        if: github.event_name == 'push'
+        run: |
+          echo "github.event_name: ${{ github.event_name }}"
+          echo "github.event: ${{ toJSON(github.event) }}"
+
+      - name: Event Workflow Dispatch
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          echo "github.event_name: ${{ github.event_name }}"
+          echo "github.event: ${{ toJSON(github.event) }}"
+
+      - name: Access Non Exist Key (push event access pull_request event)
+        continue-on-error: true
+        if: github.event_name == 'push'
+        run: |
+          echo "github.event_name: ${{ github.event_name }}"
+          echo "github.event: ${{ toJSON(github.event) }}"
+          echo "github.event.pull_request: ${{ github.event.pull_request }}"
+          echo "Should fail: github.event.pull_request.number: ${{ github.event.pull_request.number }}"
